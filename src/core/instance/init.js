@@ -47,9 +47,12 @@ export function initMixin (Vue: Class<Component>) {
     } else {
       vm._renderProxy = vm
     }
+
+    // 各种初始化操作，初始化state数据绑定就在这里。
+
     // expose real self
     vm._self = vm
-    initLifecycle(vm)
+    initLifecycle(vm) // 生命周期的初始化，在这里之后，生命周期是否可以用
     initEvents(vm)
     initRender(vm)
     callHook(vm, 'beforeCreate')

@@ -46,8 +46,10 @@ export function proxy (target: Object, sourceKey: string, key: string) {
 }
 
 export function initState (vm: Component) {
-  vm._watchers = []
-  const opts = vm.$options
+  vm._watchers = [];  // 初始化一个watcher数组
+
+  // 这个options挂载了什么， 能不能打印出来看下。
+  const opts = vm.$options 
   if (opts.props) initProps(vm, opts.props)
   if (opts.methods) initMethods(vm, opts.methods)
   if (opts.data) {
@@ -127,6 +129,7 @@ function initData (vm: Component) {
   const props = vm.$options.props
   const methods = vm.$options.methods
   let i = keys.length
+  // 这里的遍历是做什么用的， 环境的检测处理，不是关键代码
   while (i--) {
     const key = keys[i]
     if (process.env.NODE_ENV !== 'production') {
@@ -242,6 +245,7 @@ function createComputedGetter (key) {
   return function computedGetter () {
     const watcher = this._computedWatchers && this._computedWatchers[key]
     if (watcher) {
+      // 如果dirty是true 通过lazy来的，使用计算 get去获取 否则直接 直接return watcher.value
       if (watcher.dirty) {
         watcher.evaluate()
       }

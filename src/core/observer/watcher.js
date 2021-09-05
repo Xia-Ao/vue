@@ -98,6 +98,7 @@ export default class Watcher {
   /**
    * Evaluate the getter, and re-collect dependencies.
    */
+  // 动态计算getter， 
   get () {
     pushTarget(this)
     let value
